@@ -1,0 +1,31 @@
+# A service is something that lets us comunicate with the outside world.
+# Essentially doing some port forwarding or something similar.
+
+# There are three types of service. Here we see a node-port
+
+# In general an application running in a pod could only be accessed whilst
+# inside the network. A node forward exposes a port to the outside world.
+
+# This is what we do here.
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: node-port-1
+spec:
+  # See the lectures for a diagram of what this means. In sort it is forwarding
+  # 80 on to the local port of 30008.
+  type: NodePort
+  ports:
+    - targetPort: 80
+      port: 80
+      nodePort: 30008
+    # This tells it which services to match to. If more than one match they are
+    # all exposed. It will connect at random to one of the nodes.
+  selector:
+    color: red
+
+# Note that there are layers and layers here. You are running kubernetes itself in
+# a docker container. This means you won't be able to directly access the application.
+# However, if you type `` in a terminal it will set up the port and tell you the Url you
+# need to go to to see the application.

@@ -1,0 +1,33 @@
+# A deployment is a lot like a replicaset
+# however, there is one extra layer that is
+# created, this is the deployment object
+# the replicaset sits inside this object
+# The deployment allows us to update versions
+# of our apps, potentially one by one.
+
+# Otherwise the definition of the file is basically
+# the same
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-1
+  labels:
+    tier: frontend
+    app: nginx
+spec:
+  # This is the bit that is new to the 
+  # replicator set
+  selector:
+    matchLabels:
+      color: red
+  replicas: 3
+  template:
+    metadata:
+      name: myapp-pod
+      labels:
+        color: red
+    spec:
+      containers:
+        - name: nginx-container
+          image: nginx:1.7.1

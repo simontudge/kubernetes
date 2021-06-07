@@ -1,0 +1,33 @@
+# The replicator set or controller is an object that controls the
+# creation of many versions of you pod. You can use it to make and
+# maintain several pods. You can also use it even if you only have
+# one pod, as it will future proof to building things up, and make
+# managing your single pod still easier.
+
+# The definition is basically the same, the kind is different.
+# The spec contains the entire definition of the pod as a sub field
+# (except without the api verion and the kind).
+
+# We also need to specify how many replicas we have.
+
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: myapp-rc
+  labels:
+    app: myapp
+    type: front-end
+spec:
+  # Put the whole pod definition here under template
+  # Take care with the indentation
+  template:
+    metadata:
+      name: myapp-pod
+      labels:
+        app: myapp-pod
+        colour: red
+    spec:
+      containers:
+        - name: nginx-container
+          image: nginx
+  replicas: 3

@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: result-service
+  labels:
+    name: result-service
+    app: demo-voting-app
+spec:
+  # See the lectures for a diagram of what this means. In sort it is forwarding
+  # 80 on to the local port of 30008.
+  type: NodePort
+  ports:
+    - targetPort: 80
+      port: 80
+      nodePort: 30009
+    # This tells it which services to match to. If more than one match they are
+    # all exposed. It will connect at random to one of the nodes.
+  selector:
+    name: result-pod
+    app: demo-voting-app

@@ -1,0 +1,27 @@
+# Yaml file needs 4 high level properites.
+# Api version, the version of k8, don't change this
+
+# Kind is what kind of thing you are making, at this point
+# I am making a pod, there are other possibilities.
+
+# Metadata is, as the name suggests, a place to put other stuff. Most
+# importantly the name, but you can also give it a list of arbitrary
+# labels
+
+# Spec: This defines the main meat of the setup. Here we define a list
+# of containers for our pod to contain. In fact this pod only has one
+# container, but in principle there could be many
+
+# To get this going run kubectl create -f pod-definition.yaml
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp-pod
+  labels:
+    app: myapp-pod
+    type: frontend
+spec:
+  containers:
+    - name: nginx-container
+      image: nginx

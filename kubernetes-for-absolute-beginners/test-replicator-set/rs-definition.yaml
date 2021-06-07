@@ -1,0 +1,31 @@
+# A replicator set is just like a replicator controller. They solve the
+# same problem. It is the newer version, and has a few more features. Most
+# noteably it allows you to match a pattern for your pods (such as in this
+# example I only want to include pods that have color = red, note that this
+# is completely meaningless.).
+# If one of these gets created elsewhere it still counts.
+
+# We also need to specifiy a different apiVersion
+
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: replicator-set-test
+  labels:
+    app: myapp
+spec:
+  # This is the bit that is new to the 
+  # replicator set
+  selector:
+    matchLabels:
+      color: red
+  replicas: 3
+  template:
+    metadata:
+      name: myapp-pod
+      labels:
+        color: red
+    spec:
+      containers:
+        - name: nginx-container
+          image: nginx
