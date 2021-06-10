@@ -1,0 +1,27 @@
+# This time create the voting app as a deployment.
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: map-deployment
+  labels:
+    name: map-deployment
+    app: map-app
+spec:
+  selector:
+    matchLabels:
+      name: map-pod
+      app: map-app
+  template:
+    metadata:
+      name: map-pod
+      labels:
+        name: map-pod
+        app: map-app
+    spec:
+      containers:
+        - name: map
+          image: sjtudge/murder-map
+          ports:
+            - containerPort: 8050
+  replicas: 3
