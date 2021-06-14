@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: map-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      name: map-pod
+      app: map-app
+  template:
+    metadata:
+      name: map-pod
+      labels:
+        name: map-pod
+        app: map-app
+    spec:
+      containers:
+        - name: map
+          image: sjtudge/murder-map:0.4
+          # image: python:3.6
+          ports:
+            - containerPort: 8050
