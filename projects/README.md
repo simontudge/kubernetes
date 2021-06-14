@@ -4,14 +4,11 @@
 
 I put a simple jupyter notebook server in a deployment, with multiple replicas. I also define a service (node-port) which allows the user to access this from the outside. This is about as simple as it gets.
 
-## Other
+## dashboard-v1
 
-Think of some other project that uses what we have learnt.
+I create a custom image with a dash server in it and a bubble map. The setup serves this dash board to the user.
 
-Ideas, something with flask? What about putting your running app in docker containers and k8.
+## dashboard-db
 
-Something with Dash, make a dashboard of something. I want at least two components to make it interesting enough.
-
-Running app? The front end you already have, and this is a pain to build in any case. Re-write the backend in flask. Two pods, which you can put in two deployments. Run them both?
-
-Then do you want some kind of database, redis or something else, just to add something more interesting? Maybe we could simply log the requests sent?
+I do exaclty as above, but in the backend I have a postgres server giving the data to the dashboard. This is a way to demonstrate a simple architecture that has multiple components that need to talk to each other.
+Both of the images are custom images.
