@@ -1,0 +1,3 @@
+*.pyc
+*.mapbox_token
+*.ipynb_checkpoints*
